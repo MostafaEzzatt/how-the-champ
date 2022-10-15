@@ -1,10 +1,20 @@
 // src/pages/api/examples.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../server/db/client";
+import { getChampionsData } from "../../utils/getChampionsData";
 
-const examples = async (req: NextApiRequest, res: NextApiResponse) => {
-  const examples = await prisma.example.findMany();
-  res.status(200).json(examples);
+const getChampionsList = async (req: NextApiRequest, res: NextApiResponse) => {
+    const champions = await getChampionsData();
+    const championsArray = Object.entries(champions).map((e) => ({ ...e[1] }));
+
+    // reset Table
+    await prisma.champions.deleteMany({});
+
+    // add champions list to the db
+    await prisma.champions.createMany({
+        data: championsArray,
+    });
+    return res.status(500).json({ done: true });
 };
 
-export default examples;
+export default getChampionsList;
