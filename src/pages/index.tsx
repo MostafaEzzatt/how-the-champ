@@ -30,7 +30,7 @@ const Home: NextPage = () => {
         if (!isLoading && !isError) {
             setChampions(dbChampions);
         }
-    }, [isLoading]);
+    }, [dbChampions, isError, isLoading]);
 
     useEffect(() => {
         if (currentChamp) {

@@ -3,7 +3,7 @@ import { Champion } from "../types/champions";
 
 interface Props {
     currentChampion: Champion;
-    chooseRandomChamp: Function;
+    chooseRandomChamp: () => Promise<void>;
     setScore: Dispatch<
         SetStateAction<{
             win: number;

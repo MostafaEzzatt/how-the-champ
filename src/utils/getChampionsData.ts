@@ -22,11 +22,17 @@ export const getAllChampions = async () => {
 
 export const getChampionsData = async () => {
     const champions = await getAllChampions();
-    let data: {
-        [key: string]: any;
+    const data: {
+        [key: string]: {
+            name: string;
+            blurb: string;
+            imagesURLs: string[];
+            spells: string[];
+            tags: string[];
+        };
     } = {};
 
-    for (let name in champions.data) {
+    for (const name in champions.data) {
         const champResponse = (await getChampionData(name)) as SingleChampion;
         const champData = champResponse.data[name];
 

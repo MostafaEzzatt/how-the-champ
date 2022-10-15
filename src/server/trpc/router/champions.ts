@@ -1,8 +1,4 @@
-import { TRPCError } from "@trpc/server";
-import { z } from "zod";
 import { generateRandomNumber } from "../../../utils/generateRandomNumber";
-import { generateSplashArtURL } from "../../../utils/getChampionsData";
-import { trpc } from "../../../utils/trpc";
 import { publicProcedure, router } from "../trpc";
 
 export const championsRouter = router({

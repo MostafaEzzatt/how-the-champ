@@ -21,7 +21,7 @@ export interface Champion {
     name: string;
     partype: string;
     passive: Passive;
-    recommended: any[];
+    recommended: [];
     skins: Skin[];
     spells: Spell[];
     stats: { [key: string]: number };
@@ -65,7 +65,6 @@ export interface Spell {
     cost: number[];
     costBurn: string;
     costType: string;
-    datavalues: Datavalues;
     description: string;
     effect: Array<number[] | null>;
     effectBurn: Array<null | string>;
@@ -79,10 +78,8 @@ export interface Spell {
     rangeBurn: string;
     resource: string;
     tooltip: string;
-    vars: any[];
+    vars: [];
 }
-
-export interface Datavalues {}
 
 export interface Leveltip {
     effect: string[];

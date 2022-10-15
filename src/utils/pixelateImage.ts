@@ -1,5 +1,3 @@
-import { MutableRefObject } from "react";
-
 export function pixelateImage(
     originalImage: HTMLImageElement,
     pixelationFactor: number,
