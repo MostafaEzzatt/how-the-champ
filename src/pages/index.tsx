@@ -51,12 +51,14 @@ const Home: NextPage = () => {
     return (
         <div className="wraper flex flex-col justify-center items-center">
             <h1>Guess How The Champ</h1>
+
             {currentChamp && (
                 <div className="canvas-wraper">
                     <canvas ref={canvasRef} />
                     <Score score={score} />
                 </div>
             )}
+
             <div>
                 {!currentChamp && (
                     <button
