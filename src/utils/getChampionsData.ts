@@ -1,10 +1,10 @@
 import { SingleChampion } from "../types/ChampionRequestType";
 
-const generateSplashArtURL = (name: string) => {
+export const generateSplashArtURL = (name: string) => {
     return `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}.jpg`;
 };
 
-const getChampionData = async (name: string) => {
+export const getChampionData = async (name: string) => {
     const response = await fetch(
         `https://ddragon.leagueoflegends.com/cdn/12.19.1/data/en_US/champion/${name}.json`
     );
@@ -12,7 +12,7 @@ const getChampionData = async (name: string) => {
     return await response.json();
 };
 
-const getAllChampions = async () => {
+export const getAllChampions = async () => {
     const response = await fetch(
         "https://ddragon.leagueoflegends.com/cdn/12.19.1/data/en_US/champion.json"
     );
