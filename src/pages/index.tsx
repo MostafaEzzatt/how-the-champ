@@ -5,8 +5,14 @@ import Score from "../components/Score";
 import { Champion } from "../types/champions";
 import { generateRandomNumber } from "../utils/generateRandomNumber";
 import { pixelateImage } from "../utils/pixelateImage";
+import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
+    const {
+        data: dbChampions,
+        isLoading,
+        isError,
+    } = trpc.champions.getAll.useQuery();
     const [champions, setChampions] = useState<Champion[]>([]);
     const [currentChamp, setCurrentChamp] = useState<Champion>();
     const canvasRef = useRef() as React.MutableRefObject<HTMLCanvasElement>;
@@ -20,27 +26,23 @@ const Home: NextPage = () => {
     };
 
     useEffect(() => {
-        fetch("/api/getChamps")
-            .then((data) => data.json())
-            .then((data) => Object.values(data))
-            .then((data) => {
-                setChampions(data as Champion[]);
-            });
-    }, []);
+        if (!isLoading && !isError) {
+            setChampions(dbChampions);
+        }
+    }, [isLoading]);
 
     useEffect(() => {
         if (currentChamp) {
             const imgURL = currentChamp.imagesURLs[0];
             const tempImage = new Image();
             tempImage.crossOrigin = "Anonymous";
-            tempImage.src = imgURL;
+            tempImage.src = imgURL || "";
 
             tempImage.onload = () => {
                 pixelateImage(tempImage, 11, canvasRef.current);
             };
 
             tempImage.onerror = () => {
-                console.log("currentChamp ERROR");
                 chooseRandomChamp(champions);
             };
         }
