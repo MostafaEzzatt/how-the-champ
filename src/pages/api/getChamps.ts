@@ -1,8 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { championsJSON } from "../../types/champions";
 import { generateRandomNumber } from "../../utils/generateRandomNumber";
-import { getChampionsJSON } from "../../utils/getChampionsJSON";
+import { readFile } from "../../utils/readFile";
 
 type Data = {
     ok: Boolean;
@@ -12,7 +11,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
-    const data = JSON.parse(getChampionsJSON());
+    const data = JSON.parse(readFile("champions.json"));
 
     for (let champ in data) {
         const champObj = data[champ];
