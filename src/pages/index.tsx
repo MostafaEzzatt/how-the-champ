@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect, useRef, useState } from "react";
 import GuessForm from "../components/GuessForm";
+import Loading from "../components/Loading";
 import Score from "../components/Score";
 import { Champion } from "../types/champions";
 import { generateRandomNumber } from "../utils/generateRandomNumber";
@@ -48,6 +49,13 @@ const Home: NextPage = () => {
         }
     }, [champions, canvasRef, currentChamp]);
 
+    if (isLoading)
+        return (
+            <div className="wraper flex justify-center items-center">
+                <Loading />
+            </div>
+        );
+
     return (
         <div className="wraper flex flex-col justify-center items-center">
             <h1>Guess How The Champ</h1>
@@ -65,7 +73,7 @@ const Home: NextPage = () => {
                         className="btn mx-auto block"
                         onClick={() => chooseRandomChamp(champions)}
                     >
-                        Start {champions.length}
+                        Start
                     </button>
                 )}
 

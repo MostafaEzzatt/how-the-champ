@@ -69,6 +69,27 @@ h1 {
     margin: 10px auto 0px;
 }
 
+@keyframes spin {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.animate-spin {
+    color: white;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+.animate-spin circle {
+    opacity: 0.25;
+}
+
+.animate-spin path {
+    opacity: 0.75;
+}
+
 input[type="text"] {
     background-color: transparent;
     text-align: center;
